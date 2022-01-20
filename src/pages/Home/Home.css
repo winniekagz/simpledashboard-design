@@ -6,9 +6,11 @@
 .main{
     display: flex;
     flex-direction: row;
+    
 }
 .home{
-     flex:4 
+     flex:4 ;
+     padding: 20px;
 } 
 
  .homeWidget{
@@ -17,4 +19,8 @@
 }
 .graphh{
     background: linear-gradient(to right ,blue,cyan);
+}
+@media screen and (max-width:1000px){
+    
+    
 }

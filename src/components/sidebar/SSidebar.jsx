@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import "./sidebar.css"
+import React, { useState ,useEffect} from 'react'
+import "./ssidebar.css"
+import CloseIcon from '@material-ui/icons/Close';
+import SubjectIcon from '@material-ui/icons/Subject';
 import {
     LineStyle,
     Timeline,
@@ -19,38 +21,81 @@ import {
   import { Link } from "react-router-dom";
  
 
-function Sidebar() {
+function Sidebar(props) {
+    const [inactive ,setInactive]=useState(false)
+
+    useEffect(() => {
+        if (inactive){
+            removeActiveClassFromSubMenu()
+        }
+        // props.onCollapse(inactive);
+        
+    }, [inactive]);
+
+    // remove active
+    const removeActiveClassFromSubMenu=()=>{
+        document.querySelectorAll(".sidebarList").forEach((el)=>{
+            el.classList.remove("active")
+
+        })  ; 
+    };
+    // useeffect
+    useEffect(() => {
+        let menuItems = document.querySelectorAll(".sidebarList");
+        menuItems.forEach((el) => {
+          el.addEventListener("click", (e) => {
+            const next = el.nextElementSibling;
+            removeActiveClassFromSubMenu();
+            menuItems.forEach((el) => el.classList.remove("active"));
+            el.classList.toggle("active");
+            console.log(next);
+            if (next !== null) {
+              next.classList.toggle("active");
+            }
+          });
+        });
+      }, []);
   
 
   
 
     return (
-        <div className='sidebar'>
-            <div className='sidebarWrapper'>
+        <div className={`sidebar ${inactive?"inactive":""}`}>
+            <div onClick={()=>setInactive(!inactive)} className='toggle-menu-btn'>
+                    {inactive?(
+                        <SubjectIcon/>
+
+
+                    ):(
+                        <CloseIcon/>  
+                    )}
+                </div>
+            <div className='sidebarWrapper' onClick={(e)=>{
+                            if (inactive){
+                                setInactive(false);
+                            }
+                        }}>
+            
                 <div className='sidebarMenu'>
                      
                     <h2 className='sidebarTitle'>DashBoard</h2>
+                    
+
                     <ul className='sidebarList' >
                         <Link to="/" className='link'>
                             <li className='si-li-item active'style={{color:"white"}}>
                                 <LineStyle  className="sidebarIcon"/>
-                                <div className='subtitle'>
-                                    Home
-                                </div>
+                                Home
                             </li>
 
                             <li className='si-li-item '>
                                 <Timeline  className="sidebarIcon"/>
-                                <div className='subtitle'>
-                                    Analytics
-                                </div>
+                                analytics
                             </li>
 
                             <li className='si-li-item '>
                                 <TrendingUp  className="sidebarIcon"/>
-                                <div className='subtitle'>
-                                    Sales
-                                </div>
+                                sales
                            </li>
                         </Link>
                     </ul>
@@ -62,17 +107,13 @@ function Sidebar() {
                         <Link to="/users" className='link'>
                             <li className='si-li-item '>
                                 <PermIdentity className='sidebarIcon'/>
-                                <div className='subtitle'>
-                                    Users
-                                </div>
+                                Users
                             </li>
                             </Link>
                             <Link to="/products" className='link'>
                             <li className='si-li-item '>
                                 <Storefront className='sidebarIcon'/>
-                                <div className='subtitle'>
-                                    Products
-                                </div>
+                                products
                             </li>
                             </Link>
 
@@ -82,22 +123,16 @@ function Sidebar() {
                            
                             <li className='si-li-item '>
                                 <AttachMoney className='sidebarIcon'/>
-                                <div className='subtitle'>
-                                    Transactions
-                                </div>
+                                transactions
                             </li>
                             <li className='si-li-item'>
                                 <Storefront className='sidebarIcon'/>
-                                <div className='subtitle'>
-                                    Products
-                                </div>
+                                products
                             </li>
 
                             <li className="si-li-item">
                                 <BarChart className="sidebarIcon" />
-                                <div className='subtitle'>
                                     Reports
-                                </div>
                             </li>
                         
                     </ul>
@@ -108,23 +143,17 @@ function Sidebar() {
                     <ul className='sidebarList'>
                         <li className="si-li-item">
                             <MailOutline className="sidebarIcon" />
-                            <div className='subtitle'>
-                                    mail
-                                </div>
+                            mail
                         </li>
 
                         <li className="si-li-item">
                             <DynamicFeed className="sidebarIcon" />
-                            <div className='subtitle'>
-                                    feedback
-                                </div>
+                            feedback
                         </li>
 
                         <li className="si-li-item">
                             <ChatBubbleOutline className="sidebarIcon" />
-                            <div className='subtitle'>
                             Messages
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -134,24 +163,17 @@ function Sidebar() {
                     <ul className='sidebarList'>
                         <li className="si-li-item">
                             <Timeline className="sidebarIcon" />
-                            <div className='subtitle'>
-                                    analytics
-                                </div>
+                            analytics
                         </li>
 
                         <li className="si-li-item">
                             <WorkOutline className="sidebarIcon" />
-                            <div className='subtitle'>
-                                    manage
-                                </div>
+                            manage
                         </li>
 
                         <li className="si-li-item">
                             <Report className="sidebarIcon" />
-                            <div className='subtitle' >
-                                    reports
-                                </div>
-                            
+                            reports
                         </li>
                     </ul>
                 </div>
