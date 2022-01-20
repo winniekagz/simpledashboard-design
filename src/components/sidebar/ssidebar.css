@@ -1,35 +1,23 @@
- .sidebar{
+.sidebar{
     flex:1;
     height:calc(100vh-50px);
     box-shadow: blue;
-    background:linear-gradient(to right,rgb(99, 99, 252),rgb(77, 32, 77));
-    width: 20%;
+    background:linear-gradient(to right,navy,rgb(77, 32, 77));
+    width: 320px;
     max-width: 25%;
-    min-width:80px;
+    min-width:320px;
     height: 100%;
     position: sticky;
     top: 50px;
-    width: 8px;
-    
-      
-    }
-    @media screen and (max-width:500px) {
-      .sidebar{
-        width: 100px;
-        /* background-color: navy; */
-        overflow-x: hidden;
 
-      }
-   
-
-} 
+}
 .sidebarWrapper{
    
         padding: 20px;
         color:white;
     
 
-} 
+}
 .sidebarMenu{
     margin-bottom: 10px;
 }
@@ -66,36 +54,27 @@
 .sidebarIcon{
    
     margin-right: 5px;
-    font-size: 20px ;
+    font-size: 20px !important;
     color: #FFAE42;
     
 
 }
 
-
-  @media screen and (max-width: 1000px) {
-    .sidebar{
-      background: linear-gradient(to right,navy,black);
+@media (max-width: 767px) {
+    .sidebar {
+      top: 12px;
+      background-color: navy;
     }
+  }
+  @media (max-width: 700px) {
     .sidebarIcon {
-      display: none;
-      box-shadow: 1px solid black;
-      color: white;
-      height: 70px;
-      width: 70px;
-    }
-    .sidebarIcon:hover{
-      transform: scale(2);
-      color: orange;
-    }
-    .sidebar{
-      overflow-x: hidden;
-    }
-    .sidebarTitle{
-      font-size: 16px;
-      color: white;
-    }
-    .subtitle{
       display: none;
     }
 }
+
+.sidebar.inactive  .toggle-menu-btn{
+    right: -50px;
+  }
+  .sidebar.inactive{
+      width: 80px;
+  }
